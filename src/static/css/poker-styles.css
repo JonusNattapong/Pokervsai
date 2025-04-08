@@ -1,0 +1,414 @@
+/* CSS เฉพาะสำหรับเกม Poker */
+
+.poker-table {
+    width: 800px;
+    height: 400px;
+    background: linear-gradient(to bottom, #0c6d3e 0%, #076324 100%);
+    border-radius: 200px;
+    margin: 20px auto;
+    position: relative;
+    border: 15px solid #5D4037;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.community-cards {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 10px;
+}
+
+.player-area {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ai-area {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-hand, .ai-hand {
+    display: flex;
+    gap: 5px;
+}
+
+.card {
+    width: 70px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    position: relative;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+.card.hearts, .card.diamonds {
+    color: red;
+}
+
+.card.clubs, .card.spades {
+    color: black;
+}
+
+.card .rank {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 16px;
+}
+
+.card .suit {
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    font-size: 16px;
+}
+
+.card .center-symbol {
+    font-size: 36px;
+}
+
+.card.back {
+    background: repeating-linear-gradient(
+        45deg,
+        #b5651d,
+        #b5651d 10px,
+        #a55a1b 10px,
+        #a55a1b 20px
+    );
+}
+
+.pot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 40px);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.player-info, .ai-info {
+    color: white;
+    background-color: rgba(0,0,0,0.7);
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.action-button.fold {
+    background-color: #ef5350;
+    color: white;
+}
+
+.action-button.check {
+    background-color: #42a5f5;
+    color: white;
+}
+
+.action-button.call {
+    background-color: #66bb6a;
+    color: white;
+}
+
+.action-button.raise {
+    background-color: #ffca28;
+    color: black;
+}
+
+.bet-slider-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.bet-slider {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.bet-amount {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.confirm-bet {
+    padding: 5px 15px;
+    background-color: #8bc34a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.game-stage {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    background-color: rgba(0,0,0,0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.deal-animation {
+    animation: deal-card 0.5s ease-out;
+    animation-fill-mode: backwards;
+}
+
+@keyframes deal-card {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) rotate(-10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+    }
+}
+
+.winner-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.winner-overlay.active {
+    display: flex;
+}
+
+.winner-message {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+}
+
+.winner-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.winner-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #42a5f5;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sound-control {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.sound-control:hover {
+    background-color: rgba(0,0,0,0.9);
+}
+
+.player-avatar, .ai-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 5px;
+    border: 3px solid white;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+}
+
+.player-avatar img, .ai-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bet-history-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.bet-history-container h3 {
+    margin-top: 0;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.bet-history {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.bet-history-item {
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fade-in 0.3s ease-out;
+}
+
+.bet-history-item.player {
+    background-color: rgba(66, 165, 245, 0.2);
+    border-left: 3px solid #42a5f5;
+}
+
+.bet-history-item.ai {
+    background-color: rgba(239, 83, 80, 0.2);
+    border-left: 3px solid #ef5350;
+}
+
+.bet-history-item .stage {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.bet-history-item .action {
+    font-weight: bold;
+}
+
+.bet-history-item .amount {
+    color: #388e3c;
+}
+
+.ai-thinking {
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-top: 5px;
+    font-size: 0.8em;
+    display: none;
+    animation: pulse 1.2s infinite;
+}
+
+.ai-thinking.active {
+    display: block;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.animate-text {
+    animation: text-slide-in 0.5s ease-out;
+}
+
+@keyframes text-slide-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hand-description {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #388e3c;
+}
+
+@media (max-width: 850px) {
+    .poker-table {
+        width: 95%;
+        height: auto;
+        aspect-ratio: 2 / 1;
+    }
+    
+    .action-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .card {
+        width: 50px;
+        height: 70px;
+    }
+    
+    .bet-history-container {
+        width: 95%;
+    }
+}

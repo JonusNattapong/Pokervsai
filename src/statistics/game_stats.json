@@ -1,0 +1,19 @@
+{
+  "total_games": 41,
+  "player_wins": 5,
+  "ai_wins": 13,
+  "draws": 23,
+  "ai_mode_stats": {
+    "Minimax": {
+      "wins": 5,
+      "losses": 0,
+      "draws": 11
+    },
+    "Pattern Recognition": {
+      "wins": 8,
+      "losses": 5,
+      "draws": 12
+    }
+  },
+  "win_rate": 12
+}
